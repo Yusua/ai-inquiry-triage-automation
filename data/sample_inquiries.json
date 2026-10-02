@@ -1,0 +1,42 @@
+[
+  {
+    "inquiry_id": "SAMPLE-001",
+    "submitted_at": "2026-10-02T01:00:00Z",
+    "name": "Alex Example",
+    "email": "alex@example.com",
+    "subject": "Quotation for a small-team subscription",
+    "message": "Hello, could you provide pricing for a subscription for a team of five? Please include the available plans and onboarding options. We are comparing services for next month."
+  },
+  {
+    "inquiry_id": "SAMPLE-002",
+    "submitted_at": "2026-10-02T01:05:00Z",
+    "name": "Blair Demo",
+    "email": "blair@example.com",
+    "subject": "Urgent: charged twice for this month's subscription",
+    "message": "My account shows two charges for the same subscription period. This is affecting our budget and I am frustrated. Please investigate urgently and explain how the duplicate charge can be refunded."
+  },
+  {
+    "inquiry_id": "SAMPLE-003",
+    "submitted_at": "2026-10-02T01:10:00Z",
+    "name": "Casey Example",
+    "email": "casey@example.com",
+    "subject": "Trouble exporting a report",
+    "message": "The report export button displays an error in my browser. I can still view the report and use the rest of the service. Could you suggest troubleshooting steps when someone is available?"
+  },
+  {
+    "inquiry_id": "SAMPLE-004",
+    "submitted_at": "2026-10-02T01:15:00Z",
+    "name": "Devon Sample",
+    "email": "devon@example.com",
+    "subject": "Partnership inquiry for a community workshop",
+    "message": "Our fictional community group is planning a workshop on digital tools. We would like to discuss a possible partnership and learn whether your team accepts collaboration proposals."
+  },
+  {
+    "inquiry_id": "SAMPLE-005",
+    "submitted_at": "2026-10-02T01:20:00Z",
+    "name": "Emery Test",
+    "email": "emery@example.com",
+    "subject": "Where can I find your accessibility statement?",
+    "message": "I am researching accessibility information for a class assignment. Could you point me to your accessibility statement or the person who can answer general questions about it? There is no urgent deadline."
+  }
+]

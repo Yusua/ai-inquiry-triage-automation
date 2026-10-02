@@ -1,0 +1,28 @@
+# Private workflow exports
+private/
+secrets/
+credentials/
+/workflow/*
+!/workflow/josh-inquiry-triage-v1.1-public.json
+*.bak
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
