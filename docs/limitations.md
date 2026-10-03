@@ -1,8 +1,8 @@
 # Limitations
 
-## Release issue requiring follow-up
+## Release verification boundary
 
-The supplied `503 - Storage Unavailable` response body lacks n8n's serialized expression prefix. Correct and retest that path before relying on a controlled HTTP 503 response or presenting this exact export as fully regression-verified. The workflow was preserved without functional edits during packaging. Details and the author-reported R11 result are in [test results](test-results.md#release-verification-issue).
+The v1.2 public export corrects the serialized expression prefix in `503 - Storage Unavailable`. The storage-response and received Gmail report captures support selected outcomes in the configured environment; the email still displays a v1.1 workflow label. Packaging checks did not run the complete live integration suite on the distributed v1.2 artifact. Verify the configured import before activation. Details are in [release verification](test-results.md#release-verification).
 
 ## Model judgment
 
@@ -30,6 +30,6 @@ The supplied `503 - Storage Unavailable` response body lacks n8n's serialized ex
 - `Review Status` is an initial marker; there is no implemented resolution-update workflow.
 - The error handler requires a separate workflow and configuration; it is not included in this repository.
 - Credentials, the spreadsheet, sheet tabs, and notification recipient must be configured after import.
-- No exact n8n version is pinned, and no reproducible Postman collection is bundled. Reviewed screenshots cover selected outcomes; Gmail-failure evidence and a completed Error Handler notification capture are still absent. The 12 regression results are author-reported, not new live integration results from packaging.
+- No exact n8n version is pinned, and no reproducible Postman collection is bundled. Reviewed screenshots cover selected outcomes, including a received storage-error email; Gmail attention-notification failure evidence with a retained inquiry row is still absent. The 12 regression results are historical author-reported results, not a new v1.2 live integration run from packaging.
 
 These boundaries describe the scope of a portfolio demonstration. The [future improvements](../README.md#future-improvements) outline possible extensions without claiming they already exist.

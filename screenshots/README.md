@@ -14,9 +14,10 @@ The following reviewed captures are included. They use synthetic inquiry data an
 | [inquiries-sheet.png](inquiries-sheet.png) | Saved demonstration rows, classification, and review status |
 | [workflow-log.png](workflow-log.png) | Completion records with `sent` and `not_required` outcomes |
 | [storage-failure-error.png](storage-failure-error.png) | HTTP 503 with `not_saved` in a captured run |
+| [storage-failure-error-notification.png](storage-failure-error-notification.png) | A received Gmail storage-error report from `Stop and Error` for a synthetic inquiry |
 | [error-handler-workflow.png](error-handler-workflow.png) | The separate Error Trigger workflow architecture |
 
-Remaining evidence to add: a Gmail-failure capture showing `notification_status = failed` alongside the retained inquiry row, and a redacted completed Error Handler notification. Use filenames such as `notification-failure.png` and `error-handler-notification.png` once those images exist.
+Remaining evidence to add: a Gmail attention-notification failure capture showing `notification_status = failed` alongside the retained inquiry row. Use a filename such as `notification-failure.png` once that image exists.
 
 Before taking screenshots, hide:
 
@@ -29,6 +30,6 @@ Before taking screenshots, hide:
 
 Use example.com addresses and synthetic request IDs in every visible test. Crop or permanently redact sensitive content, then reopen the saved image and inspect it at full size before committing. Do not rely on a reversible overlay or a hidden window to keep private information out of a capture.
 
-The included storage-response image shows a 503 response in its captured environment. The distributed JSON still has the [response-expression issue](../docs/test-results.md#release-verification-issue), so that capture does not establish that the public artifact was corrected. The Error Handler image shows its structure and does not prove a completed delivery. Keep these boundaries clear in captions.
+The included storage-response image shows HTTP 503 in its captured environment. The received Gmail report adds delivery evidence for the separate error handler, while its workflow label still reads v1.1. The v1.2 export's corrected response expression is checked separately; these captures do not establish a complete v1.2 regression run. The Error Handler image shows its structure. See [release verification](../docs/test-results.md#release-verification) for the distinction between static checks, received email evidence, and full runtime testing.
 
 When a file exists, add a relative Markdown image link with a useful caption to the main README. Do not add placeholder image references before the corresponding PNG has been saved and reviewed.

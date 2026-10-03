@@ -54,7 +54,7 @@ Restrict access to these stores and recipients, and configure retention for the 
 
 ## Errors and operational scope
 
-The custom 400, 409, and classification-validation 500 branches return limited error information. The intended sanitized 503 body has a [known expression issue](test-results.md#release-verification-issue) in the supplied export. Unexpected failures do not all use these custom responses; configure and review the separate error handler before operational use.
+The custom 400, 409, and classification-validation 500 branches return limited error information. V1.2 corrects the 503 response expression, which returns the inquiry ID and a fixed storage-unavailable message instead of raw service errors. See [release verification](test-results.md#release-verification). Unexpected failures do not all use these custom responses; configure and review the separate error handler before operational use.
 
 Google Sheets is appropriate here for demonstration and small-scale workflow storage. It is not a high-concurrency transactional database. Rate limiting, atomic duplicate protection, automatic retry recovery, and a comprehensive audit trail are outside this template's implemented controls.
 
@@ -63,5 +63,7 @@ Google Sheets is appropriate here for demonstration and small-scale workflow sto
 Packaging checks inspect the complete public file set and staged content for common secret patterns, private identifiers, real service links, and non-example email addresses. Documentation may discuss credentials and secrets without containing their values.
 
 The repository includes only the sanitized workflow export. It omits credential objects, webhook/instance/version identifiers, the private workflow ID and error-workflow link, pinned customer executions, and deployment metadata. The workflow stays inactive. Node and internal field IDs remain to preserve the structure.
+
+The storage-error Gmail screenshot has permanent pixel redactions over sender/account details, its execution ID, and its private execution URL. Public screenshots must not reveal live n8n account hostnames or workflow/execution identifiers even when the inquiry itself is synthetic. The original capture remains only in the ignored local `private/` directory.
 
 `private/`, `secrets/`, `credentials/`, environment files, backups, and non-allowlisted workflow files are ignored by Git. No environment file is bundled. Ignoring a path is not encryption and does not protect an already-tracked file; review staged content before every public update.

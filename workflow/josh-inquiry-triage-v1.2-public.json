@@ -1,5 +1,5 @@
 {
-  "name": "JOSH Portfolio 01 — AI Inquiry Triage v1.1",
+  "name": "JOSH Portfolio 01 - AI Inquiry Triage v1.2",
   "nodes": [
     {
       "parameters": {
@@ -12,10 +12,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2352,
-        160
+        -1232,
+        592
       ],
-      "id": "778ddbb4-0079-4975-ac26-e7c7f282b15c",
+      "id": "9b9f09d3-a5af-4d37-bef0-180e6d310b9c",
       "name": "500"
     },
     {
@@ -29,10 +29,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        -32
+        -3584,
+        400
       ],
-      "id": "a558689b-7de5-455d-bb82-c8830ffea77d",
+      "id": "26db6bbd-0858-4063-8e7c-c64b913200e4",
       "name": "Webhook",
       "notes": "PUBLIC TEMPLATE: Configure your own Header Auth credential before testing or activating. Keep header authentication enabled. Choose an unused webhook path on your instance. The private error-workflow link was removed; select your own error workflow in Settings if needed."
     },
@@ -43,10 +43,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        224,
-        -32
+        -3360,
+        400
       ],
-      "id": "09b257eb-0d7f-4320-8951-e3bf82a7271f",
+      "id": "1f51484d-71fb-4ae1-a0d0-7932f051a442",
       "name": "Validate Inquiry"
     },
     {
@@ -60,10 +60,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        672,
-        64
+        -2912,
+        496
       ],
-      "id": "541ae6cc-8733-4038-b0af-e48ec1f21b4c",
+      "id": "7c51429f-ad63-48e4-8c16-d0242cea2fda",
       "name": "400 - Invalid Inquiry"
     },
     {
@@ -113,10 +113,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        672,
-        -128
+        -2912,
+        304
       ],
-      "id": "eadb7e11-28fe-48d5-b9b5-488222aafd20",
+      "id": "bfc074fe-a273-4e74-87c8-457ea818c62a",
       "name": "Normalize Inquiry"
     },
     {
@@ -144,10 +144,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        896,
-        -128
+        -2688,
+        304
       ],
-      "id": "59f0d00b-2c31-484d-a2d4-0ed83d8da699",
+      "id": "c8495b91-a532-4df1-b30d-0be2bef33375",
       "name": "Check Existing Inquiry",
       "alwaysOutputData": true,
       "notes": "PUBLIC TEMPLATE: Select your own Google Sheets credential and replace YOUR_GOOGLE_SHEET_ID with your spreadsheet ID. Use the same spreadsheet in all three Google Sheets nodes. Create a tab named Inquiries; its headers must match the column mappings in this workflow."
@@ -180,10 +180,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1120,
-        -128
+        -2464,
+        304
       ],
-      "id": "2311ea93-d9cb-409e-ab4b-f3d123ee6711",
+      "id": "cccda81d-66be-4ca6-9171-c09331b723a9",
       "name": "Is Duplicate?"
     },
     {
@@ -197,10 +197,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        1344,
-        -224
+        -2240,
+        208
       ],
-      "id": "0326448a-20fa-4a41-a4c4-d09debc24cb8",
+      "id": "740e245c-f729-41f0-8fb6-87590b099e00",
       "name": "409 - Duplicate Inquiry"
     },
     {
@@ -398,10 +398,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        2608,
-        -112
+        -976,
+        320
       ],
-      "id": "563e5e80-1ffd-4f1c-8f92-4223c600f8f1",
+      "id": "26317ecf-aabc-4628-9d4b-d6f83f00944c",
       "name": "Save Inquiry",
       "onError": "continueErrorOutput",
       "notes": "PUBLIC TEMPLATE: Select your own Google Sheets credential and replace YOUR_GOOGLE_SHEET_ID with your spreadsheet ID. Use the same spreadsheet in all three Google Sheets nodes. Create a tab named Inquiries; its headers must match the column mappings in this workflow."
@@ -510,10 +510,10 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        4144,
-        -112
+        560,
+        320
       ],
-      "id": "a3076c05-51c9-42cb-8781-483fdd953436",
+      "id": "e5e54ee1-aaac-4510-8931-b8aa97614c63",
       "name": "Log Processing",
       "notes": "PUBLIC TEMPLATE: Select your own Google Sheets credential and replace YOUR_GOOGLE_SHEET_ID with your spreadsheet ID. Use the same spreadsheet in all three Google Sheets nodes. Create a tab named Workflow Log; its headers must match the column mappings in this workflow."
     },
@@ -528,10 +528,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        4336,
-        -112
+        752,
+        320
       ],
-      "id": "4e42e50c-a15c-4740-a444-74545e4a0712",
+      "id": "409fcde0-a8d2-4626-a5ab-f433c34138ee",
       "name": "200 - Return Success"
     },
     {
@@ -552,10 +552,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        3584,
-        -432
+        0,
+        0
       ],
-      "id": "17252f8c-837c-4ada-bbf5-9aa67b832fc2",
+      "id": "ed903729-1a8c-4f49-b156-74e2ed7a67f4",
       "name": "Mark Notification Sent"
     },
     {
@@ -582,10 +582,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        3584,
-        -112
+        0,
+        320
       ],
-      "id": "c5ac8c18-8328-4983-9fed-5bce1ea73d58",
+      "id": "a637eecf-1f11-4e52-8484-ac951090e53a",
       "name": "Mark No Notification Needed"
     },
     {
@@ -606,16 +606,16 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        3936,
-        -112
+        352,
+        320
       ],
-      "id": "77124fd0-790d-45ab-8e2a-5a7ba46340e5",
+      "id": "90f53d74-e706-4942-98e8-595993fa0ae4",
       "name": "Prepare Processing Result"
     },
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "{{ JSON.stringify({\n  success: false,\n  inquiry_id: $(\"Normalize Inquiry\").first().json.inquiry_id,\n  status: \"not_saved\",\n  error: \"Storage temporarily unavailable\"\n}) }}",
+        "responseBody": "={{ JSON.stringify({\n  success: false,\n  inquiry_id: $(\"Normalize Inquiry\").first().json.inquiry_id,\n  status: \"not_saved\",\n  error: \"Storage temporarily unavailable\"\n}) }}",
         "options": {
           "responseCode": "={{ 503 }}"
         }
@@ -623,10 +623,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2880,
-        96
+        -704,
+        528
       ],
-      "id": "34ba4f66-6144-4d12-b609-0919946bf306",
+      "id": "f0f2459c-9185-42ac-9bf2-295c0465032a",
       "name": "503 - Storage Unavailable"
     },
     {
@@ -636,10 +636,10 @@
       "type": "n8n-nodes-base.stopAndError",
       "typeVersion": 1,
       "position": [
-        3104,
-        96
+        -480,
+        528
       ],
-      "id": "3838b02e-8356-4a2a-83f3-e3e97ca5c8c1",
+      "id": "4e4afbb2-6bac-456e-be9f-b6cec888986a",
       "name": "Stop and Error"
     },
     {
@@ -649,10 +649,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2352,
-        -48
+        -1232,
+        384
       ],
-      "id": "098ca081-2dc0-40ce-921f-42492ed06c0b",
+      "id": "b14f94ed-2859-4435-9dd5-6a8aa662ab2e",
       "name": "Prepare Safe Sheet Data"
     },
     {
@@ -690,10 +690,10 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 2.3,
       "position": [
-        1344,
-        -32
+        -2240,
+        400
       ],
-      "id": "04c4c122-a62f-4e01-87f6-30fe6f3399ab",
+      "id": "839553b1-fb2d-4fef-be0c-2274d41a605f",
       "name": "OpenAI Classifier",
       "notes": "PUBLIC TEMPLATE: Select your own OpenAI credential. The original credential and AI Gateway account metadata have been removed."
     },
@@ -704,10 +704,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1680,
-        -32
+        -1904,
+        400
       ],
-      "id": "c5f03680-062b-49ea-b747-88ed2390471d",
+      "id": "b6fc8bc4-c0b3-49b0-aa93-ef68930f90b9",
       "name": "Combine Inquiry and Classification"
     },
     {
@@ -738,10 +738,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2128,
-        -32
+        -1456,
+        400
       ],
-      "id": "c5f438c9-6caf-4fbc-88ed-af80630462c0",
+      "id": "176d8935-627c-4fc5-91f8-16b1f3fcfdda",
       "name": "Is Classification Valid?"
     },
     {
@@ -768,10 +768,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        3584,
-        -272
+        0,
+        160
       ],
-      "id": "6025a194-7a38-4179-b80d-3a4560287031",
+      "id": "9e25dd18-9203-441b-9331-513a0c8f6b14",
       "name": "Mark Notification Failed"
     },
     {
@@ -781,10 +781,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1920,
-        -32
+        -1664,
+        400
       ],
-      "id": "60f14536-d730-44d5-9a51-9700b74d5476",
+      "id": "c8780020-fe34-49e9-8cbb-165e4a4abc73",
       "name": "Validate AI Output"
     },
     {
@@ -841,10 +841,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.5,
       "position": [
-        3120,
-        -320
+        -464,
+        112
       ],
-      "id": "a8afe664-d814-45a3-b2ab-3d7c4f41b60b",
+      "id": "3a6bbf89-2ca9-4b08-86d0-c7019d4ab6b9",
       "name": "Prepare Attention Alert"
     },
     {
@@ -884,10 +884,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2880,
-        -128
+        -704,
+        304
       ],
-      "id": "6756394f-8caf-4a7c-b17b-281dffe10472",
+      "id": "4e917c40-4999-4bf8-ae98-2830fb443e6f",
       "name": "Is Attention Needed?"
     },
     {
@@ -901,10 +901,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        3344,
-        -320
+        -240,
+        112
       ],
-      "id": "7f569654-2614-4a19-b160-d4f00bd70643",
+      "id": "0d929c74-dda1-491e-957b-bcf1035ddf0d",
       "name": "Send Attention Notification",
       "onError": "continueErrorOutput",
       "notes": "PUBLIC TEMPLATE: Select your own Gmail credential and replace notifications@example.com with your intended internal recipient before testing or activating."
@@ -937,10 +937,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        448,
-        -32
+        -3136,
+        400
       ],
-      "id": "d320b5cc-0c75-4997-85ca-9de6b5d95c2a",
+      "id": "8e6f7ecc-6968-4108-b39d-1f42332085d4",
       "name": "Is Inquiry Valid?"
     }
   ],
@@ -1227,7 +1227,5 @@
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner",
     "availableInMCP": false
-  },
-  "nodeGroups": [],
-  "tags": []
+  }
 }

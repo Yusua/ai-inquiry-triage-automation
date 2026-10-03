@@ -53,7 +53,7 @@ The project regression report covers 12 synthetic scenarios, including duplicate
 
 The result is a 26-node AI-assisted inquiry workflow with structured classification, review routing, demonstration storage, internal notifications, and explicit response branches. The public repository provides the sanitized template, five synthetic requests, import instructions, architecture, and documented boundaries without publishing the configured instance or account details.
 
-Packaging review also found a response-expression mismatch in the current export's 503 node. The export remains unchanged, and the issue is [documented for correction and R11 retesting](test-results.md#release-verification-issue). A release review should make this kind of discrepancy visible rather than treat a historical test report as proof about every later artifact.
+Packaging review of v1.1 found a response-expression mismatch in its 503 node. V1.2 corrects the serialized expression prefix while preserving the routing and intended response fields. The updated portfolio also includes a redacted Gmail storage-error report from the configured environment. [Release verification](test-results.md#release-verification) distinguishes this static correction and captured notification delivery from a complete runtime regression of the public v1.2 template.
 
 ## Lessons Learned
 

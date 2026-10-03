@@ -2,6 +2,8 @@
 
 Portfolio Project #1 · n8n · OpenAI · Google Sheets · Gmail
 
+Current public template: [v1.2 workflow](workflow/josh-inquiry-triage-v1.2-public.json).
+
 ## Overview
 
 An end-to-end AI-assisted customer inquiry workflow built with n8n. It combines language-model classification with explicit validation, storage, routing, and response rules. This is an automation workflow, not an autonomous AI agent; people remain responsible for reviewing and resolving inquiries.
@@ -19,7 +21,7 @@ Incoming inquiries are:
 9. Logged with their notification outcome.
 10. Returned with the appropriate HTTP response for the handled branch.
 
-**Release note:** The public export is preserved exactly as supplied. Packaging review identified a response-expression issue in the storage-failure branch. Resolve it and rerun R11 before relying on the advertised 503 behavior. See [test results](docs/test-results.md#release-verification-issue). Live integrations were not rerun during packaging.
+**v1.2 release note:** The storage-failure response now uses the correct serialized n8n expression prefix. A reviewed Gmail capture also shows a received storage-error report from the separately configured error handler. Static export checks and captured runtime evidence are described in [release verification](docs/test-results.md#release-verification); the full live integration suite was not rerun during packaging.
 
 ## Business Problem
 
@@ -40,7 +42,7 @@ The workflow turns an inquiry into a structured record containing its original d
 - Google Sheets persistence with `Review Status` tracking.
 - Gmail escalation for high-priority or human-review inquiries.
 - Notification failure handling that preserves an already-saved inquiry.
-- Storage failure routing and configured HTTP 200 / 400 / 409 / 500 / 503 response nodes, subject to the release note above.
+- Storage failure routing and configured HTTP 200 / 400 / 409 / 500 / 503 response nodes.
 - Compatibility with a separately configured centralized error-handler workflow.
 - Spreadsheet RAW writes on `Save Inquiry` for formula-safety at the inquiry-storage boundary.
 
@@ -138,7 +140,7 @@ An illustrative response; exact model classifications can vary.
 | 400 | Invalid inquiry payload |
 | 409 | Existing inquiry ID; no new inquiry row is appended on this branch |
 | 500 | Invalid or unusable classification output reaches the validation-failure branch |
-| 503 | Intended response for a `Save Inquiry` failure; current export requires the expression correction described in the release note |
+| 503 | `Save Inquiry` failure; the response reports `not_saved` before the execution stops with an error |
 
 Authentication rejection happens at the webhook before these normal branches. OpenAI API failures, lookup failures, and log failures are not all mapped to these custom response bodies.
 
@@ -158,11 +160,11 @@ Input checks, constrained AI output, and RAW inquiry writes provide separate saf
 
 Gmail errors are captured as `notification_status = failed` after the inquiry has been stored. Provided the completion log succeeds, processing can still return HTTP 200. The failure message is recorded internally for investigation.
 
-Storage failures are routed toward a 503 response and then `Stop and Error`; the packaged response-expression issue must be corrected to validate that behavior. Unexpected failures can invoke a separate n8n Error Trigger workflow once it is configured in Workflow Settings. That optional workflow is not included here.
+Storage failures route to a 503 response and then `Stop and Error`. In v1.2, the response body has the corrected expression prefix. A separate n8n Error Trigger workflow can notify an administrator when an automatic execution fails, once it is selected in Workflow Settings. That optional workflow is not included here; its structure and a received storage-error email are shown in the screenshot evidence.
 
 ## Testing
 
-The project author reports completing a 12-case regression suite using synthetic data, with all cases passing in the tested environment. [Test results](docs/test-results.md) records that supplied report separately from packaging checks, selected screenshot evidence, and the current-export R11 discrepancy. A reproducible Postman collection is not included, and the screenshots do not cover every regression case.
+The project author previously reported completing a 12-case regression suite using synthetic data, with all cases passing in the tested environment. [Test results](docs/test-results.md) separates that historical report from v1.2 packaging checks and selected screenshot evidence. A reproducible Postman collection is not included, and the screenshots do not cover every regression case or establish a complete v1.2 runtime test.
 
 ## Setup
 
@@ -189,9 +191,10 @@ The following request capture shows successful processing with no notification r
 | Saved inquiry classifications and review status | [Inquiries tab](screenshots/inquiries-sheet.png) |
 | Sent and not-required notification outcomes | [Workflow Log tab](screenshots/workflow-log.png) |
 | Storage-unavailable response from a captured run | [HTTP 503 response](screenshots/storage-failure-error.png) |
+| Received storage-error report for a synthetic inquiry | [Gmail storage-error notification](screenshots/storage-failure-error-notification.png) |
 | Optional separate error-handler architecture | [Error Handler workflow](screenshots/error-handler-workflow.png) |
 
-The storage-response capture shows a 503 outcome in the captured environment; it does not resolve the response-expression issue in the distributed JSON. The Error Handler image shows its architecture. A Gmail-failure capture showing `failed` while the inquiry remains stored is still needed. See the [screenshot guide](screenshots/README.md) for evidence boundaries and redaction requirements.
+The storage-response capture shows HTTP 503, and the Gmail capture shows a received storage-error notification. The email's displayed workflow label is still v1.1, so it supports delivery in the captured environment rather than a complete v1.2 runtime test. The Error Handler image shows its architecture. A Gmail attention-notification failure capture showing `failed` while the inquiry remains stored is still needed. See the [screenshot guide](screenshots/README.md) for evidence boundaries and redaction requirements.
 
 ## Limitations
 

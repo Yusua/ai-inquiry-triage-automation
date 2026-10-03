@@ -1,6 +1,6 @@
 # Architecture
 
-The public template contains 26 nodes and 27 directed connections. One authenticated POST supplies one inquiry. OpenAI assists with classification; n8n applies the explicit validation, persistence, and routing rules.
+The public v1.2 template contains 26 nodes and 27 directed connections. One authenticated POST supplies one inquiry. OpenAI assists with classification; n8n applies the explicit validation, persistence, and routing rules.
 
 ## Main workflow
 
@@ -37,7 +37,7 @@ flowchart TD
     log --> success["200 - Return Success"]
 ```
 
-The storage-error connections exist, but the response body in `503 - Storage Unavailable` has a known expression-format issue. The diagram describes configured routing, not proof that this response executes successfully. See [release verification](test-results.md#release-verification-issue).
+V1.2 corrects the expression prefix in `503 - Storage Unavailable`. A storage failure follows the error output to the HTTP 503 response, then `Stop and Error` marks the execution as failed. The connections are unchanged from v1.1. See [release verification](test-results.md#release-verification) for static checks and the boundaries of the captured runtime evidence.
 
 ## Data flow and decisions
 
@@ -71,11 +71,13 @@ This is a configuration pattern for a **separate workflow**, not another branch 
 
 ```mermaid
 flowchart LR
-    failure["Unexpected Workflow Failure"] --> trigger["Error Trigger"]
+    failure["Failed Automatic Execution"] --> trigger["Error Trigger"]
     trigger --> report["Prepare Error Report"]
     report --> administrator["Administrator Notification"]
 ```
 
 Create or import the handler, configure its own credentials and recipient, then select it in this workflow's settings. The public template removes the original private handler reference. The handler should send a minimal internal report without exposing customer content or credentials.
+
+Storage failures that reach `Stop and Error` can invoke this handler as well as unexpected execution failures. Error Trigger does not run for manual editor executions; test delivery through the production webhook of the activated/published main workflow. The [Gmail capture](../screenshots/storage-failure-error-notification.png) shows received storage-error reporting from a configured environment, not installation of the handler by the public template.
 
 R12 in the [author-reported regression suite](test-results.md) depends on this separate configuration. No claim is made that a handler is installed merely by importing the public template.

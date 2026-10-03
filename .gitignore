@@ -3,7 +3,7 @@ private/
 secrets/
 credentials/
 /workflow/*
-!/workflow/josh-inquiry-triage-v1.1-public.json
+!/workflow/josh-inquiry-triage-v1.2-public.json
 *.bak
 
 # Environment and secrets
