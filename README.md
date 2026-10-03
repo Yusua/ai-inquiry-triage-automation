@@ -162,7 +162,7 @@ Storage failures are routed toward a 503 response and then `Stop and Error`; the
 
 ## Testing
 
-The project author reports completing a 12-case regression suite using synthetic data, with all cases passing in the tested environment. [Test results](docs/test-results.md) records that supplied report separately from packaging checks and the current-export R11 discrepancy. A Postman collection and execution screenshots are not included.
+The project author reports completing a 12-case regression suite using synthetic data, with all cases passing in the tested environment. [Test results](docs/test-results.md) records that supplied report separately from packaging checks, selected screenshot evidence, and the current-export R11 discrepancy. A reproducible Postman collection is not included, and the screenshots do not cover every regression case.
 
 ## Setup
 
@@ -170,7 +170,28 @@ Follow [setup instructions](docs/setup.md) to import the template, configure cre
 
 ## Screenshots
 
-Add redacted images under `screenshots/` using the [capture guide](screenshots/README.md). No screenshots are bundled yet, and there are no placeholder image links.
+The repository includes reviewed captures using synthetic data. The workflow overview is split into two readable views:
+
+![Webhook intake, validation, duplicate lookup, and OpenAI classification](screenshots/workflow-overview-1.png)
+
+![Inquiry storage, attention routing, notification outcomes, and completion logging](screenshots/workflow-overview-2.png)
+
+The following request capture shows successful processing with no notification required:
+
+![Synthetic inquiry with HTTP 200 and notification_status not_required](screenshots/successful-request-POSTMAN.png)
+
+| Evidence | Screenshot |
+| --- | --- |
+| Required-field rejection | [HTTP 400 validation response](screenshots/validation-error-POSTMAN.png) |
+| Duplicate rejection with original inquiry ID | [HTTP 409 duplicate response](screenshots/duplicate-response-POSTMAN.png) |
+| Six-field AI output | [OpenAI classification](screenshots/openai-classification.png) |
+| Internal human-review alert | [Attention notification](screenshots/attention-notification.png) |
+| Saved inquiry classifications and review status | [Inquiries tab](screenshots/inquiries-sheet.png) |
+| Sent and not-required notification outcomes | [Workflow Log tab](screenshots/workflow-log.png) |
+| Storage-unavailable response from a captured run | [HTTP 503 response](screenshots/storage-failure-error.png) |
+| Optional separate error-handler architecture | [Error Handler workflow](screenshots/error-handler-workflow.png) |
+
+The storage-response capture shows a 503 outcome in the captured environment; it does not resolve the response-expression issue in the distributed JSON. The Error Handler image shows its architecture. A Gmail-failure capture showing `failed` while the inquiry remains stored is still needed. See the [screenshot guide](screenshots/README.md) for evidence boundaries and redaction requirements.
 
 ## Limitations
 

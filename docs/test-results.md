@@ -2,7 +2,7 @@
 
 ## Author-reported final regression suite
 
-The project author reports completing the following 12-case regression suite using Postman and synthetic data, with every case passing in the tested environment. These results were supplied for the portfolio documentation; the packaging process did not rerun the live n8n, OpenAI, Google Sheets, or Gmail integrations. Execution exports, a Postman collection, and screenshots have not been supplied in this repository.
+The project author reports completing the following 12-case regression suite using Postman and synthetic data, with every case passing in the tested environment. These results were supplied for the portfolio documentation; the packaging process did not rerun the live n8n, OpenAI, Google Sheets, or Gmail integrations. Selected reviewed screenshots are included. Execution exports and a reproducible Postman collection are not included.
 
 | ID | Scenario | Expected outcome | Reported result |
 | --- | --- | --- | --- |
@@ -23,6 +23,22 @@ All regression testing used synthetic data. No production or client data was use
 
 R12 requires a separately configured Error Trigger workflow. R9 concerns the `Save Inquiry` RAW append. R10 continues through the completion logger; failure of that later write is a separate condition.
 
+## Included screenshot evidence
+
+| Capture | What is visible | Evidence boundary |
+| --- | --- | --- |
+| [Successful request](../screenshots/successful-request-POSTMAN.png) | Synthetic inquiry, HTTP 200, and `not_required` | Supports the successful no-notification response |
+| [Validation error](../screenshots/validation-error-POSTMAN.png) | Blank message rejected with HTTP 400 | Shows required-field rejection, not every validation rule |
+| [Duplicate response](../screenshots/duplicate-response-POSTMAN.png) | HTTP 409 with a populated inquiry ID | Does not alone prove the spreadsheet row count was unchanged |
+| [OpenAI output](../screenshots/openai-classification.png) | All six classification fields | One model result, not an accuracy benchmark |
+| [Attention notification](../screenshots/attention-notification.png) | Human-review alert with summary and recommended action | Uses synthetic customer information |
+| [Inquiries tab](../screenshots/inquiries-sheet.png) | Saved rows with high-priority and other-category review cases | Historical `REG-009` is outside this capture and needs its own retest to establish a fix |
+| [Workflow Log](../screenshots/workflow-log.png) | Completion rows with `sent` and `not_required` | No `failed` notification outcome is shown |
+| [Storage response](../screenshots/storage-failure-error.png) | HTTP 503, `not_saved`, and the storage-unavailable message | The distributed JSON still has the response-expression issue below |
+| [Error Handler](../screenshots/error-handler-workflow.png) | Error Trigger, report preparation, and notification nodes | Shows the separate workflow structure, not proof of an error-triggered delivery |
+
+The repository also includes two main-workflow overview images. No capture of Gmail failure with a retained inquiry row is included yet. These images are selected supporting evidence; they do not independently establish all 12 reported outcomes on the distributed artifact.
+
 ## Release verification issue
 
 **R11 must be repeated on the imported public artifact after a response-expression correction.**
@@ -31,7 +47,7 @@ The packaged `503 - Storage Unavailable` node has a `responseBody` beginning wit
 
 The static diagnosis is supported by n8n's [expression detection](https://github.com/n8n-io/n8n/blob/master/packages/workflow/src/expressions/expression-helpers.ts) and [JSON response handling](https://github.com/n8n-io/n8n/blob/master/packages/nodes-base/nodes/RespondToWebhook/RespondToWebhook.node.ts). The former requires an expression prefix; the latter parses literal response strings as JSON. This indicates the current body can fail before sending the intended storage-unavailable response. A live import and execution were not performed during packaging.
 
-The packaging task required the supplied workflow to remain unchanged, so no functional correction was applied. Correct the expression in a reviewed working copy and capture fresh R11 evidence before presenting this exact artifact as fully regression-verified.
+The packaging task required the supplied workflow to remain unchanged, so no functional correction was applied. The subsequently supplied storage-response screenshot shows a successful 503 response in the captured environment, but the distributed JSON still lacks the expression prefix. Correct and retest the imported public artifact before presenting that exact artifact as fully regression-verified.
 
 ## Packaging checks
 
@@ -46,7 +62,7 @@ The following checks are separate from the author-reported integration suite:
 | Configuration | PASS | Inactive workflow, Header Auth retained, three sheet placeholders and correct tab names, placeholder Gmail recipient |
 | Notification and duplicate fixes | PASS | Exact `notification_status` field name on all three branches; 409 reads from `Normalize Inquiry` |
 | Local logic checks | PASS | 22 synthetic checks of the exported validation code and mocked duplicate response |
-| Documentation review | PASS | Public-file inventory and 25 relative links checked; no nonexistent screenshot links |
+| Documentation review | PASS | Public-file inventory and relative documentation/screenshot links checked; no nonexistent screenshot links |
 
 Private-path ignore rules and staged-file privacy checks are also required before the initial commit. The local logic checks execute the exported JavaScript with mocked n8n inputs; they do not simulate the full n8n runtime.
 

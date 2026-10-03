@@ -30,6 +30,6 @@ The supplied `503 - Storage Unavailable` response body lacks n8n's serialized ex
 - `Review Status` is an initial marker; there is no implemented resolution-update workflow.
 - The error handler requires a separate workflow and configuration; it is not included in this repository.
 - Credentials, the spreadsheet, sheet tabs, and notification recipient must be configured after import.
-- No exact n8n version is pinned, and no reproducible Postman collection or screenshots are bundled. The 12 regression results are author-reported, not new live integration results from packaging.
+- No exact n8n version is pinned, and no reproducible Postman collection is bundled. Reviewed screenshots cover selected outcomes; Gmail-failure evidence and a completed Error Handler notification capture are still absent. The 12 regression results are author-reported, not new live integration results from packaging.
 
 These boundaries describe the scope of a portfolio demonstration. The [future improvements](../README.md#future-improvements) outline possible extensions without claiming they already exist.

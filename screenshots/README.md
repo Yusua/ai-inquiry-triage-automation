@@ -1,18 +1,22 @@
 # Screenshot Capture Guide
 
-Add these images manually after importing, configuring, and testing a synthetic-data copy. No image files are currently included, so the repository does not link to nonexistent screenshots.
+The following reviewed captures are included. They use synthetic inquiry data and illustrate selected outcomes from the configured environment. The workflow export remains generic and inactive.
 
-| Expected filename | What to show |
+| Included image | What it shows |
 | --- | --- |
-| `workflow-overview.png` | The full main workflow with readable branch names |
-| `successful-request.png` | A synthetic POST request and HTTP 200 response |
-| `validation-error.png` | A missing-field or malformed-email request and HTTP 400 |
-| `duplicate-response.png` | Repeated synthetic inquiry ID, HTTP 409, and no new inquiry row |
-| `openai-classification.png` | The six structured output fields using synthetic input |
-| `attention-notification.png` | An internal attention alert with synthetic customer details |
-| `inquiries-sheet.png` | Demonstration inquiry rows, classifications, and review status |
-| `workflow-log.png` | Completion records with notification outcomes |
-| `error-handler.png` | The separately configured Error Trigger workflow and a redacted test outcome |
+| [workflow-overview-1.png](workflow-overview-1.png) | Intake, validation, lookup, and classification |
+| [workflow-overview-2.png](workflow-overview-2.png) | Storage, attention routing, notification outcomes, and completion |
+| [successful-request-POSTMAN.png](successful-request-POSTMAN.png) | A synthetic request and HTTP 200 response |
+| [validation-error-POSTMAN.png](validation-error-POSTMAN.png) | A blank-message request and HTTP 400 |
+| [duplicate-response-POSTMAN.png](duplicate-response-POSTMAN.png) | HTTP 409 with the original inquiry ID |
+| [openai-classification.png](openai-classification.png) | The six structured classification fields |
+| [attention-notification.png](attention-notification.png) | An internal review alert with synthetic customer details |
+| [inquiries-sheet.png](inquiries-sheet.png) | Saved demonstration rows, classification, and review status |
+| [workflow-log.png](workflow-log.png) | Completion records with `sent` and `not_required` outcomes |
+| [storage-failure-error.png](storage-failure-error.png) | HTTP 503 with `not_saved` in a captured run |
+| [error-handler-workflow.png](error-handler-workflow.png) | The separate Error Trigger workflow architecture |
+
+Remaining evidence to add: a Gmail-failure capture showing `notification_status = failed` alongside the retained inquiry row, and a redacted completed Error Handler notification. Use filenames such as `notification-failure.png` and `error-handler-notification.png` once those images exist.
 
 Before taking screenshots, hide:
 
@@ -25,6 +29,6 @@ Before taking screenshots, hide:
 
 Use example.com addresses and synthetic request IDs in every visible test. Crop or permanently redact sensitive content, then reopen the saved image and inspect it at full size before committing. Do not rely on a reversible overlay or a hidden window to keep private information out of a capture.
 
-Capture the corrected storage-failure response separately as evidence for R11 before describing this exact public artifact as fully tested. The main workflow's [release issue](../docs/test-results.md#release-verification-issue) and the optional nature of the error handler should remain clear in captions.
+The included storage-response image shows a 503 response in its captured environment. The distributed JSON still has the [response-expression issue](../docs/test-results.md#release-verification-issue), so that capture does not establish that the public artifact was corrected. The Error Handler image shows its structure and does not prove a completed delivery. Keep these boundaries clear in captions.
 
 When a file exists, add a relative Markdown image link with a useful caption to the main README. Do not add placeholder image references before the corresponding PNG has been saved and reviewed.
